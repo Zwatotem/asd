@@ -3,16 +3,21 @@
 
 #include <iostream>
 #include "Sorter.cpp"
+#include "MergeSorter.cpp"
 
 int main()
 {
 	vector<int> arr1{
 		-1,-1,3,4,77,2,18,-15,-4,-3,5,5,2,7,-4,4
 	};
-	Sorter<int> sorter(arr1);
-	sorter.sort();
-	sorter.print();
-	std::cout << sorter.verify() << std::endl;
+	/*Insetrion*/Sorter<int> isorter(arr1);
+	MergeSorter<int> msorter(arr1);
+	isorter.sort();
+	msorter.sort();
+	isorter.print();
+	msorter.print();
+	std::cout << isorter.verify() << std::endl;
+	std::cout << msorter.verify() << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
