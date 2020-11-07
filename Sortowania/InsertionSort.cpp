@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Sorter.cpp"
 #include "MergeSorter.cpp"
+#include "HeapSorter.cpp"
 
 int main()
 {
@@ -12,12 +13,16 @@ int main()
 	};
 	/*Insetrion*/Sorter<int> isorter(arr1);
 	MergeSorter<int> msorter(arr1);
+	HeapSorter<int> hsorter(arr1);
 	isorter.sort();
 	msorter.sort();
+	hsorter.sort();
 	isorter.print();
 	msorter.print();
+	hsorter.print();
 	std::cout << isorter.verify() << std::endl;
 	std::cout << msorter.verify() << std::endl;
+	std::cout << hsorter.verify() << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
