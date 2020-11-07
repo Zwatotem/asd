@@ -1,22 +1,20 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "Sorter.cpp"
 using std::vector;
 template <typename T>
-class MergeSorter
+class MergeSorter : public Sorter<T>
 {
+	using Sorter<T>::array;
+	using Sorter<T>::old_array;
+
 private:
-	vector<T> array;
-	vector<T> old_array;
 	void merge_sort(int start, int end);
 	void merge(int start, int mid, int end);
+
 public:
 	MergeSorter(vector<T> array);
-	void sort();
 
-	bool verify();
-	vector<T> get();
-	void set(vector<T> new_array);
-	void print();
+	virtual void sort() override;
 };
-

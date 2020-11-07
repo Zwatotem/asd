@@ -1,13 +1,15 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "Sorter.h"
 using std::vector;
 template <typename T>
-class HeapSorter
-{
+class HeapSorter : public Sorter<T>
+{	
+    using Sorter<T>::array;
+    using Sorter<T>::old_array;
+	
 private:
-	vector<T> array;
-	vector<T> old_array;
 	int heapSize;
 	void buildHeap(int start, int end);
 	void heapify(int position);
@@ -17,14 +19,10 @@ private:
 	int left(int nodeN) { return array[(2 * nodeN + 1)]; };
 	int right(int nodeN) { return array[(2 * nodeN + 2)]; };
 	int parent(int nodeN) { return array[(nodeN / 2 - 1)]; };
-	void heapSort(int n);
+	void heapSortIteration(int n);
 public:
 	HeapSorter(vector<T> array);
-	void sort();
 
-	bool verify();
-	vector<T> get();
-	void set(vector<T> new_array);
-	void print();
+    virtual void sort() override;
 };
 

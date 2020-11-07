@@ -3,9 +3,8 @@
 using std::vector;
 
 template <typename T>
-HeapSorter<T>::HeapSorter(vector<T> array)
+HeapSorter<T>::HeapSorter(vector<T> array) : Sorter<T>(array)
 {
-	this->array = array;
 	heapSize = array.size();
 }
 
@@ -14,11 +13,9 @@ void HeapSorter<T>::sort()
 {
 	old_array = array;
 	buildHeap(0, array.size());
-	print();
 	for (; heapSize > 2; heapSize--)
 	{
-		heapSort(heapSize - 1);
-		print();
+		heapSortIteration(heapSize - 1);
 	}
 }
 
@@ -52,76 +49,11 @@ void HeapSorter<T>::heapify(int position)
 		std::swap(array[position], array[maxpos]);
 		heapify(maxpos);
 	}
-	// print();
 }
 
 template <typename T>
-void HeapSorter<T>::heapSort(int n)
+void HeapSorter<T>::heapSortIteration(int n)
 {
 	std::swap(array[0], array[n]);
 	heapify(0);
-}
-template <typename T>
-vector<T> HeapSorter<T>::get()
-{
-	return array;
-}
-
-template <typename T>
-void HeapSorter<T>::set(vector<T> new_array)
-{
-	array = new_array;
-	heapSize = array.size();
-}
-
-template <typename T>
-void HeapSorter<T>::print()
-{
-	using std::cout;
-	using std::endl;
-	cout << "(";
-	for (auto i : array)
-	{
-		cout << i << ", ";
-	}
-	cout << "\b\b)" << endl;
-}
-
-template <typename T>
-bool HeapSorter<T>::verify()
-{
-	for (auto i = 0; i < array.size() - 1; i++)
-	{
-		if (array[i + 1] < array[i])
-		{
-			return false;
-		}
-	}
-	int count = 0;
-	for (auto i = 0; i < array.size(); i++)
-	{
-		if (i == array.size() - 1 || array[i] != array[i + 1])
-		{
-			count++;
-			auto searched = array[i];
-			auto old_count = 0;
-			for (auto j = 0; j < old_array.size(); j++)
-			{
-				if (old_array[j] == searched)
-				{
-					old_count++;
-				}
-			}
-			if (old_count != count)
-			{
-				return false;
-			}
-			count = 0;
-		}
-		else
-		{
-			count++;
-		}
-	}
-	return true;
 }
