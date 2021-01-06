@@ -1,6 +1,6 @@
 #include "tree.h"
 
-void Tree::insert(Node *node)
+void Tree::insert(Node* node)
 {
 	if (isEmpty())
 	{
@@ -13,7 +13,7 @@ void Tree::insert(Node *node)
 	}
 }
 
-void TNode::insert(Node *node)
+void TNode::insert(Node* node)
 {
 	if (node->data < data)
 	{
@@ -43,24 +43,21 @@ void TNode::insert(Node *node)
 
 void Tree::insert(int key)
 {
-	Node *node = new TNode(key);
+	Node* node = new TNode(key);
 	insert(node);
 }
 
 void TNode::insert(int key)
 {
-	Node *node = new TNode(key);
+	Node* node = new TNode(key);
 	insert(node);
 }
 
-Node *Tree::get(int key)
-{
-	return isEmpty() ? nullptr : root->get(key);
-}
+Node* Tree::get(int key) { return isEmpty() ? nullptr : root->get(key); }
 
 void Tree::remove(int key)
 {
-	Node *toremove = get(key);
+	Node* toremove = get(key);
 	if (toremove != nullptr)
 	{
 		toremove = remove(toremove);
@@ -68,7 +65,7 @@ void Tree::remove(int key)
 	}
 }
 
-Node *TNode::get(int key)
+Node* TNode::get(int key)
 {
 	if (key == data)
 	{
@@ -98,7 +95,7 @@ Node *TNode::get(int key)
 	}
 }
 
-Node *TNode::successor()
+Node* TNode::successor()
 {
 	if (right != nullptr)
 	{
@@ -114,7 +111,7 @@ Node *TNode::successor()
 	return nullptr;
 }
 
-Node *TNode::predecessor()
+Node* TNode::predecessor()
 {
 	if (left != nullptr)
 	{
@@ -130,15 +127,9 @@ Node *TNode::predecessor()
 	return nullptr;
 }
 
-Node *TNode::leftmost()
-{
-	return left != nullptr ? left->leftmost() : this;
-}
+Node* TNode::leftmost() { return left != nullptr ? left->leftmost() : this; }
 
-Node *TNode::rightmost()
-{
-	return right != nullptr ? right->rightmost() : this;
-}
+Node* TNode::rightmost() { return right != nullptr ? right->rightmost() : this; }
 int TNode::childCount()
 {
 	if (left == right && right == nullptr)
@@ -152,7 +143,7 @@ int TNode::childCount()
 	else
 		return 2;
 }
-void TNode::replaceChild(Node *child, Node *newChild)
+void TNode::replaceChild(Node* child, Node* newChild)
 {
 	if (left == child)
 	{
@@ -163,7 +154,7 @@ void TNode::replaceChild(Node *child, Node *newChild)
 		right = (TNode*)newChild;
 	}
 }
-Node *Tree::remove(Node *bnode)
+Node* Tree::remove(Node* bnode)
 {
 	TNode* node = static_cast<TNode*>(bnode);
 	switch (node->childCount())
@@ -187,13 +178,13 @@ Node *Tree::remove(Node *bnode)
 		}
 		else
 		{
-			Node *child = node->TNode::getChild();
+			Node* child = node->TNode::getChild();
 			node->parent->TNode::replaceChild(node, child);
 			child->setParent(node->parent);
 			return node;
 		}
 	case 2:
-		Node *replacement = node->successor();
+		Node* replacement = node->successor();
 		if (replacement != nullptr)
 			replacement = node->predecessor();
 		replacement = remove(replacement);
