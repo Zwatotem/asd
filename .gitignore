@@ -5,3 +5,4 @@
 *.vcxproj*
 *.exe
 *.idea
+*.code-workspace
